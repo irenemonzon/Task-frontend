@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import ProjectForm from "@/components/ProjectForm"
+import { ProjectFormData } from "types"
 
 const CreateProjectView = () => {
 
-    const initialvalues={
+    const initialvalues:ProjectFormData={
         projectName:"",
         clientName:"",
         description:""
