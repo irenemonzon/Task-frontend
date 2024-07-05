@@ -15,7 +15,7 @@ const EditTaskData = () => {
     const{data,isError}=useQuery({
 
         queryKey:['task',taskId],
-        queryFn:()=>getTaskById({projectId,taskId}),
+        queryFn:()=> getTaskById({projectId,taskId}),
         enabled:!!taskId
     })
     if(isError)return<Navigate to={'/404'}/>
