@@ -4,6 +4,7 @@ import { getProjectById } from "@/services/ProjectApi"
 import AddTaskModal from "@/components/Tasks/AddTaskModal"
 import TaskList from "@/components/Tasks/TaskList"
 import EditTaskData from "@/components/Tasks/EditTaskData"
+import TaskModalDetails from "@/components/Tasks/TaskModalDetails"
 
 
 const ProjectDetailView = () => {
@@ -40,6 +41,7 @@ const ProjectDetailView = () => {
         />
         <AddTaskModal/>
         <EditTaskData/>
+        <TaskModalDetails/>
     </>
   )
 }
