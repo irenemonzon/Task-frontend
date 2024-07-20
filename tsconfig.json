@@ -12,6 +12,7 @@
      "@/layouts/*":["layouts/*"],
      "@/services/*":["services/*"],
      "@/types/*":["types/*"],
+     "@/hooks/*":["hooks/*"],
     },
 
     /* Bundler mode */
