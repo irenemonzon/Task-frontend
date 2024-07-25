@@ -9,6 +9,7 @@ type TaskApi={
     status:Task['status']
 }
 
+
 export async function createTask({formData,projectId}:Pick<TaskApi,'formData'|'projectId'>){
     try{
         const url=`/projects/${projectId}/tasks`
@@ -26,6 +27,7 @@ export async function getTaskById({projectId,taskId}:Pick<TaskApi,'projectId'|'t
     try{
         const url=`/projects/${projectId}/tasks/${taskId}`
         const {data}=await api(url)
+        return data
         const response= taskSchema.safeParse(data)
         if(response.success){
             return response.data
