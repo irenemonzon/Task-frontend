@@ -26,6 +26,9 @@ export const userSchema=authSchema.pick({
 })
 export type User=z.infer<typeof userSchema>
 
+export type UserProfileForm=Pick<User , 'name'| 'email'>
+
+
 
 export const taskStatusSchema=z.enum(['pending','onHold','inProgress','underReview',"completed"])
 export type TaskStatus=z.infer<typeof taskStatusSchema>
