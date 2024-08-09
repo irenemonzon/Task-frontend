@@ -1,14 +1,17 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { EllipsisVerticalIcon } from '@heroicons/react/20/solid'
-import { useQuery,useMutation,useQueryClient } from "@tanstack/react-query"
-import { deleteProject, getProjects } from "@/services/ProjectApi"
-import { toast } from "react-toastify"
+import { useQuery } from "@tanstack/react-query"
+import { getProjects } from "@/services/ProjectApi"
 import { useAuth } from "@/hooks/useAuth"
 import { isManager } from "../utils/policies"
+import DeleteProjectModal from "@/components/DeleteProjectModal"
 
 const DashboardView = () => {
+
+  const location=useLocation()
+  const navigate=useNavigate()
 
   const {data:user,isLoading:authLoading}=useAuth()
 
@@ -18,20 +21,6 @@ const DashboardView = () => {
   })
 
 
-  const queryClient=useQueryClient()
-
-  const {mutate}=useMutation({
-    mutationFn:deleteProject,
-    onError:(error)=>{
-        toast.error(error.message)
-
-    },
-    onSuccess:(data)=>{
-        toast.success(data)
-        queryClient.invalidateQueries({queryKey:['projects']})
-
-    }
-  })
 
   if(isLoading && authLoading)return 'Cargando...'
 
@@ -100,7 +89,7 @@ const DashboardView = () => {
                                             <button 
                                                 type='button' 
                                                 className='block px-3 py-1 text-sm leading-6 text-red-500'
-                                                onClick={() => mutate(project._id)}
+                                                onClick={() => navigate(location.pathname + `?deleteProject=${project._id}`)}
                                             >
                                             Eliminar Proyecto
                                              </button>
@@ -123,6 +112,7 @@ const DashboardView = () => {
         className="text-fuchsia-500 font-bold">Crear proyecto</Link>
       </p>
     )}
+    <DeleteProjectModal/>
    </>
   )
 }
