@@ -9,6 +9,15 @@ import { statusTranslation } from '../../locales/es';
 import { TaskStatus } from '@/types/index';
 
 
+interface Activity {
+    _id: string;
+    status: string;
+    user: {
+      name: string;
+    };
+  }
+
+
 export default function TaskModalDetails() {
     const params=useParams();
     const projectId=params.projectId!
@@ -88,7 +97,7 @@ export default function TaskModalDetails() {
                                     </Dialog.Title>
                                     <p className='text-lg text-slate-500 mb-2'>Descripción: {data.description}</p>
                                     <p className='text-lg text-slate-500 mb-2'>Historial de cambios</p>
-                                    {data.completedBy.map(activity=>(
+                                    {data.completedBy.map((activity:Activity)=>(
                                          <p key={activity._id}><span className='font-bold text-slate-600'>{ statusTranslation[activity.status] } </span>{''} por: {activity.user.name}</p>
 
                                     )) }
