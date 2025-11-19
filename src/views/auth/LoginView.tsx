@@ -20,7 +20,8 @@ export default function LoginView() {
   const {mutate}=useMutation({
     mutationFn:authenticateUser,
     onError:(error)=>{
-      toast.error(error.message)
+      const message = (error as any)?.message || 'Ha ocurrido un error'
+      toast.error(message)
     },
     onSuccess:()=>{
       navigate('/')
